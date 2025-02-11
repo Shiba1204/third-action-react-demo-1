@@ -35,7 +35,7 @@ jobs:
       - name: Test code
         id: run-test                    # id name added
         run: npm run test
-      - name: Upload test report          #if condition added
+      - name: Upload test report          #if condition added in git hub still it will not work next step
         if: steps.run-test.outcome == 'failure'          
         uses: actions/upload-artifact@v4
         with:
