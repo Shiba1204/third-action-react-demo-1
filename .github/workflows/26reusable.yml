@@ -1,8 +1,22 @@
-name: 26.reusable.yml
-on: workflow_call
+name: 26reusable.yml
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        description: the name of deployable files
+        required: true
+        default: dist
+        type: string
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Get code
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.artifact-name }}
+      - name: List files
+        run: ls    
       - name: output information
         run: echo "Deploying and uploading"  
