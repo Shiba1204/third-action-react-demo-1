@@ -1,0 +1,26 @@
+name: 25.matrix include & exclude
+on: push
+jobs: 
+  build:
+    strategy:
+        matrix:
+          node-version: [ 14, 16, 18 ]
+          operating-system: [ ubuntu-latest, windows-latest ]
+          include:
+            - node-version: 20
+              operating-system: ubuntu-latest
+          exclude:
+            - node-version: 14
+              operating-system: windows-latest       
+    runs-on: ${{ matrix.operating-system }}
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: install NodeJS
+        uses: actions/setup-node@v3
+        with:
+            node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Build project
+        run: npm run build             
