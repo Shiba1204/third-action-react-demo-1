@@ -1,4 +1,4 @@
-name: 26.reusable deploy
+name: 26.reusable.yml
 on: workflow_call
 jobs:
   deploy:
