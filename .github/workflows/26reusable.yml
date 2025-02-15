@@ -7,13 +7,22 @@ on:
         required: true
         default: dist
         type: string
+    outputs:
+      results:
+        description: the result of the deployment operation
+        value: ${{ jobs.deploy.outputs.outcome }}   
+    secrets:
+      some-seceret:
+        required: true
 
 jobs:
   deploy:
+    outputs:
+      outcome: ${{ steps.set-result.outputs.step-result}}
     runs-on: ubuntu-latest
     steps:
       - name: Get code
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ${{ inputs.artifact-name }}
       - name: List files

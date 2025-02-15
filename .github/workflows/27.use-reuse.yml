@@ -68,6 +68,10 @@ jobs:
     uses: ./.github/workflows/26reusable.yml
     with:
       artifact-name: dist
+    secrets:
+      some-secerets: ${{ secrets.some-seceret }}
+
+
   report:
     needs: [lint, deploy]
     if: failure()
